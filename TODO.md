@@ -1,0 +1,2 @@
+- Log management (nginxrp, each server behind rp, container log files)
+- set up default behaviour for nginx-rp (relevant file in sites-enabled)

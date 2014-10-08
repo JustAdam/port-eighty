@@ -1,0 +1,29 @@
+rpdata:
+  image: justadam/docker-gen:0.3.4
+  volumes:
+    - ./docker-gen/templates/:/etc/docker-gen/
+    - ./docker-gen/sites-enabled/:/etc/nginx/sites-enabled/
+  command: echo "Volume only container"
+dockergen:
+  image: justadam/docker-gen:0.3.4
+  volumes_from:
+    - rpdata
+  volumes:
+    - /var/run/docker.sock:/docker.sock
+  environment:
+    - DOCKER_HOST=unix:///docker.sock
+  command: /usr/bin/docker-gen -watch -only-exposed -notify-sighup=porteighty_nginxrp_1 nginx.tmpl /etc/nginx/sites-enabled/nginx-reverse-proxy
+nginxrp:
+  image: justadam/nginx-rp
+  ports:
+    - 80:80
+  volumes_from:
+    - rpdata
+hugo:
+  image: justadam/hugo:0.12
+  hostname: before
+  domainname: before.no
+  volumes:
+    - ../websites/before.no/:/content
+  environment:
+    - VHOST=www.before.no
