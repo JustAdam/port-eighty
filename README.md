@@ -26,7 +26,7 @@ Build the following containers (follow each link for instructions):
 
 ### Start docker-gen
 
-`$ docker run -d --name docker-gen -v /var/run/docker.sock:/docker.sock --volumes-from rp-data justadam/docker-gen:0.3.4`
+`$ docker run -d --name docker-gen -v /var/run/docker.sock:/docker.sock -e DOCKER_HOST=unix:///docker.sock --volumes-from rp-data justadam/docker-gen:0.3.4`
 
 ### Start nginx 
 
