@@ -1,1 +1,0 @@
-- Log management (nginx-rp, each server behind rp, container log files)

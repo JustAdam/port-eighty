@@ -5,8 +5,8 @@ upstream {{ $server }} {
 
 server {
   server_name {{ $server }};
-  #access_log /logs/{{ $server }}/access.log;
-  #error_log /logs/{{ $server }}/error.log;
+  access_log /dev/stdout site_combined;
+  error_log /dev/stderr;
 
   location / {
     proxy_set_header Host $host;
