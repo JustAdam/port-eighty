@@ -1,0 +1,1 @@
+- fix build instructions for docker-gen binary

@@ -2,6 +2,9 @@ FROM ubuntu:14.04
 
 MAINTAINER JustAdam <adambell7@gmail.com>
 
+RUN apt-get update && \
+    apt-get upgrade -y
+
 ADD hugo /usr/bin/hugo
 
 # Ouput files
