@@ -5,13 +5,15 @@ Runs [docker-gen](https://github.com/jwilder/docker-gen) stand alone inside a co
 
 ## Build a docker-gen binary
 
+* requires *Go*
+
 ```
-$ git clone git@github.com:jwilder/docker-gen.git
-$ cd docker-gen
+$ go get -d github.com/jwilder/docker-gen
+$ cd /path/to/src/github.com/jwilder/docker-gen
 $ DGTAG=$(git describe --tags --abbrev=0 | sed 's/^v//' | sed 's/\+.*$$//')
-$ go build -ldflags "-s -X main.Version $DGTAG" -o ../docker-gen
-$ cd ..
-$ rm -rf docker-gen/
+$ go build -ldflags "-s -X main.Version $DGTAG" -o docker-gen-bin
+$ cd /path/to/port-eighty/docker-gen
+$ mv /path/to/src/github.com/jwilder/docker-gen/docker-gen-bin docker-gen
 ```
 
 ## Build the Docker image
