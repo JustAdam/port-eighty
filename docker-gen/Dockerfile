@@ -3,7 +3,8 @@ FROM ubuntu:14.04
 MAINTAINER JustAdam <adambell7@gmail.com>
 
 RUN apt-get update && \
-    apt-get upgrade -y
+    apt-get upgrade -y && \
+    apt-get clean
 
 ADD docker-gen /usr/bin/docker-gen
 ENV DOCKER_HOST unix:///docker.sock

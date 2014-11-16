@@ -4,6 +4,7 @@ MAINTAINER JustAdam <adambell7@gmail.com>
 
 RUN apt-get update && \
     apt-get upgrade -y && \
+    apt-get clean && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
 
 # Log to stdout/stderr
