@@ -1,0 +1,7 @@
+FROM ubuntu:14.04
+
+ENV PYTHONUNBUFFERED 1
+
+ADD hello.py /
+
+EXPOSE 1234
