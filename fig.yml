@@ -27,3 +27,9 @@ hugo:
     - ../websites/before.no/:/content
   environment:
     - VHOST=www.before.no
+hello:
+  build: hello
+  command: python /hello.py hello world
+  environment:
+    - PORT=1234
+    - VHOST=example.com
