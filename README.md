@@ -32,7 +32,7 @@ Build the following containers (follow each link for instructions):
 
 `$ docker run -d -p 80:80 --name nginx-rp --volumes-from rp-data justadam/nginx-rp`
 
-This gives us a nginx with a reverse proxy configuration (this file can be found at [docker-gen/templates/nginx.tmpl](docker-gen/templates/nginx.tmpl).  The file will be updated by docker-gen each time a container stop or starts.
+This gives us a nginx with a reverse proxy configuration (this file can be found at [docker-gen/templates/nginx.tmpl](docker-gen/templates/nginx.tmpl).  The file will be updated by docker-gen each time a container stops or starts.
 
 Now we need a container to serve some content; this could be anything (apache, nginx, your own webserver), but we will be using a static content site generator named hugo, which also comes with its own webserver.
 Each container which is to sit behind the reverse proxy needs to set an environment variable called VHOST, which is the URL it will be serving content on.
@@ -40,3 +40,23 @@ Each container which is to sit behind the reverse proxy needs to set an environm
 ### Start hugo
 
 `$ docker run -d --name hugo -e VHOST=www.before.no -v $(pwd):/content justadam/hugo:0.12`
+
+Testing
+=======
+
+Nginx-rp looks at all web requests coming in, and routes to different containers based on the `Host` HTTP header sent by a web browser. In this way a single front end can automatically route between different sub-webservers.
+
+For testing, we need to pass our own `Host` header.  Using boot2docker on OSX, this is:
+
+    curl -i --header 'Host: example.com' $(boot2docker ip 2> /dev/null)
+
+The `example.com` matches `VHOST=example.com` in the top-level `fig.yml` file, therefore Nginx-rp routes the request to the `hello` Docker container.  This container receives the request, and responds:
+
+    HTTP/1.1 200 OK
+    Server: nginx/1.4.6 (Ubuntu)
+    Date: Wed, 21 Jan 2015 14:33:16 GMT
+    Content-Type: text/plain
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    
+    hello world

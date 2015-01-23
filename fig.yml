@@ -27,3 +27,8 @@ hugo:
     - ../websites/before.no/:/content
   environment:
     - VHOST=www.before.no
+hello:
+  build: hello
+  environment:
+    - PORT=1234
+    - VHOST=example.com
