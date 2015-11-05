@@ -3,7 +3,7 @@ rpdata:
   volumes:
     - ./docker-gen/templates/:/etc/docker-gen/
     - ./docker-gen/sites-enabled/:/etc/nginx/sites-enabled/
-  command: echo "Volume only container"
+  command: echo "Data-only container"
 dockergen:
   image: justadam/docker-gen:0.3.4
   volumes_from:
@@ -20,10 +20,11 @@ nginxrp:
   volumes_from:
     - rpdata
 hugo:
-  image: justadam/hugo:0.12
+  image: justadam/hugo:0.13
   hostname: before
   domainname: before.no
   volumes:
     - ../websites/before.no/:/content
   environment:
-    - VHOST=www.before.no
+    - VHOST=before
+  command: /usr/bin/hugo server --watch --appendPort=false --baseUrl=http://before --source=/content --destination=/hugo --buildDrafts 

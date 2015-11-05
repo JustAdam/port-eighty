@@ -7,9 +7,9 @@ Quick start
 ===========
 
 * Install docker
-* Install [fig](http://fig.sh)
-* You'll probably want to edit the hugo section in fig.yml
-* `$ fig up -d`
+* Install [docker-compose](https://docs.docker.com/compose/)
+* You'll probably want to edit the hugo section in docker-compose.yml
+* `$ docker-compose up -d`
 
 Manual startup
 ==============
@@ -20,9 +20,9 @@ Build the following containers (follow each link for instructions):
 * [nginx-rp](nginx-rp)
 * [hugo](hugo)
 
-### Create a volume-only container
+### Create a data-only container
 
-`$ docker run -d --name rp-data -v $(pwd)/templates:/etc/docker-gen/ -v $(pwd)/sites-enabled/:/etc/nginx/sites-enabled/:rw justadam/docker-gen:0.3.4 echo "Volume container"`
+`$ docker run -d --name rp-data -v $(pwd)/templates:/etc/docker-gen/ -v $(pwd)/sites-enabled/:/etc/nginx/sites-enabled/:rw justadam/docker-gen:0.3.4 echo "Data-only container"`
 
 ### Start docker-gen
 
